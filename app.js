@@ -176,10 +176,35 @@
     client.on("message", function (topic, payload) {
       const msg = payload.toString();
       logRx(topic, msg);
-      if (topic === TOPICS.value1) {
-        el.labelV1.textContent = msg + "  單位1";
-      } else if (topic === TOPICS.value2) {
-        el.labelV2.textContent = msg + "  單位2";
+      switch (topic) {
+        case TOPICS.value1:
+          el.labelV1.textContent = msg + "  單位1";
+          break;
+        case TOPICS.value2:
+          el.labelV2.textContent = msg + "  單位2";
+          break;
+        case TOPICS.led1:
+          ledState.led1 = msg;
+          el.led1.classList.toggle("on", msg === "on");
+          break;
+        case TOPICS.led2:
+          ledState.led2 = msg;
+          el.led2.classList.toggle("on", msg === "on");
+          break;
+        case TOPICS.switch1:
+          el.switch1.checked = msg === "true";
+          break;
+        case TOPICS.switch2:
+          el.switch2.checked = msg === "true";
+          break;
+        case TOPICS.slider1:
+          el.slider1.value = msg;
+          el.sliderValue1.textContent = msg;
+          break;
+        case TOPICS.slider2:
+          el.slider2.value = msg;
+          el.sliderValue2.textContent = msg;
+          break;
       }
     });
   }
