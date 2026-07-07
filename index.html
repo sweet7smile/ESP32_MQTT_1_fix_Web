@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ESPHomeMQTT 控制台</title>
+<link rel="icon" href="assets/IoT-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <header class="app-header">
+    <img src="assets/IoT-icon.png" alt="" class="app-icon">
+    <h1>ESPHomeMQTT 控制台</h1>
+  </header>
+
+  <section class="card">
+    <h2 class="card-title">連線設定</h2>
+    <div class="conn-grid">
+      <label class="field">
+        <span>Broker</span>
+        <input id="broker" type="text" value="mqttgo.io" placeholder="Hostname or IP" autocomplete="off">
+      </label>
+      <label class="field field-narrow">
+        <span>Port</span>
+        <input id="port" type="number" value="8084" inputmode="numeric">
+      </label>
+      <label class="field field-narrow">
+        <span>Path</span>
+        <input id="path" type="text" value="/mqtt" autocomplete="off">
+      </label>
+      <label class="field field-checkbox">
+        <input id="secure" type="checkbox" checked>
+        <span>WSS 加密連線</span>
+      </label>
+      <div class="conn-buttons">
+        <button id="btnConnect" class="btn btn-primary">Connect</button>
+        <button id="btnDisconnect" class="btn btn-danger" hidden>Disconnect</button>
+        <img id="imgConnected" src="assets/not_ok.png" alt="connection status" class="conn-icon">
+      </div>
+    </div>
+    <div class="state-row">
+      <span>State:</span>
+      <span id="lblState" class="state-value">Disconnected</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="card-title">燈光 / 開關</h2>
+    <div class="controls-grid">
+      <div class="led-block">
+        <button id="led1" class="led-btn" type="button">1</button>
+        <span class="control-label">LED 1</span>
+      </div>
+      <div class="led-block">
+        <button id="led2" class="led-btn" type="button">2</button>
+        <span class="control-label">LED 2</span>
+      </div>
+      <label class="switch-block">
+        <span class="control-label">開關1</span>
+        <span class="switch">
+          <input id="switch1" type="checkbox">
+          <span class="switch-track switch-track-red"></span>
+        </span>
+      </label>
+      <label class="switch-block">
+        <span class="control-label">開關2</span>
+        <span class="switch">
+          <input id="switch2" type="checkbox">
+          <span class="switch-track"></span>
+        </span>
+      </label>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="card-title">參數 / 感測值</h2>
+
+    <div class="param-row">
+      <span class="param-label">參數1:</span>
+      <span id="labelV1" class="param-value">XXX 單位</span>
+    </div>
+    <div class="param-row">
+      <span class="param-label">參數2:</span>
+      <span id="labelV2" class="param-value">XXX 單位</span>
+    </div>
+
+    <div class="slider-row">
+      <span class="param-label">參數3:</span>
+      <input id="slider1" type="range" min="0" max="100" value="30" class="slider slider-red">
+      <span id="sliderValue1" class="slider-value">30</span>
+    </div>
+    <div class="slider-row">
+      <span class="param-label">參數4:</span>
+      <input id="slider2" type="range" min="0" max="100" value="30" class="slider slider-cyan">
+      <span id="sliderValue2" class="slider-value">30</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="log-header">
+      <h2 class="card-title">訊息 Log</h2>
+      <button id="btnClearLog" class="btn btn-clear" type="button">清除</button>
+    </div>
+    <div id="msgLog" class="log-box"></div>
+  </section>
+
+</div>
+
+<script src="vendor/mqtt.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

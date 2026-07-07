@@ -1,0 +1,375 @@
+:root {
+  --bg: #f2f4f7;
+  --card-bg: #ffffff;
+  --text: #222;
+  --muted: #666;
+  --primary: #2f8f4e;
+  --primary-dark: #236b3a;
+  --danger: #d9453d;
+  --danger-dark: #b23730;
+  --border: #e0e2e6;
+  --led-off: #c0c0c0;
+  --led-on: #33ffff;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Segoe UI", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 4px;
+}
+
+.app-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.app-header h1 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  padding: 16px;
+}
+
+.card-title {
+  font-size: 1rem;
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ---- Connection card ---- */
+
+.conn-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 12px 16px;
+  align-items: end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.field input[type="text"],
+.field input[type="number"] {
+  font-size: 1rem;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  width: 100%;
+  color: var(--text);
+  background: #fafbfc;
+}
+
+.field input:disabled {
+  opacity: 0.6;
+}
+
+.field-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  grid-column: span 1;
+}
+
+.field-checkbox input {
+  width: 18px;
+  height: 18px;
+}
+
+.conn-buttons {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  min-height: 44px;
+}
+
+.btn-primary { background: var(--primary); }
+.btn-primary:active { background: var(--primary-dark); }
+
+.btn-danger { background: var(--danger); }
+.btn-danger:active { background: var(--danger-dark); }
+
+.conn-icon {
+  width: 28px;
+  height: 28px;
+  margin-left: auto;
+}
+
+.state-row {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.state-value {
+  font-weight: 600;
+}
+
+/* ---- Controls card ---- */
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  justify-items: center;
+}
+
+.led-block, .switch-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.led-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: none;
+  background: var(--led-off);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.led-btn.on {
+  background: var(--led-on);
+  color: #044;
+}
+
+.control-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 56px;
+  height: 32px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch-track {
+  position: absolute;
+  inset: 0;
+  background: #ccc;
+  border-radius: 32px;
+  transition: background-color 0.15s ease;
+}
+
+.switch-track::before {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.switch input:checked + .switch-track {
+  background: var(--primary);
+}
+
+.switch input:checked + .switch-track-red {
+  background: #ff0000;
+}
+
+.switch input:checked + .switch-track::before {
+  transform: translateX(24px);
+}
+
+/* ---- Params card ---- */
+
+.param-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 1.1rem;
+}
+
+.param-label {
+  min-width: 70px;
+  color: var(--muted);
+}
+
+.param-value {
+  font-weight: 600;
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.slider {
+  flex: 1;
+  height: 32px;
+  accent-color: #ff0000;
+}
+
+.slider-cyan {
+  accent-color: #00bcd4;
+}
+
+.slider-value {
+  min-width: 2.5em;
+  text-align: right;
+  font-weight: 600;
+}
+
+/* ---- Log card ---- */
+
+.log-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.log-header .card-title {
+  margin: 0;
+}
+
+.btn-clear {
+  background: #eee;
+  color: var(--muted);
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  min-height: unset;
+}
+
+.log-box {
+  height: 220px;
+  overflow-y: auto;
+  background: #14161a;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: "SFMono-Regular", Consolas, "Courier New", monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.log-entry {
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: #ddd;
+}
+
+.log-time {
+  color: #888;
+}
+
+.log-entry.log-tx .log-dir { color: #4fc3f7; }
+.log-entry.log-rx .log-dir { color: #66bb6a; }
+.log-entry.log-sys .log-dir { color: #ffb74d; }
+
+.log-topic {
+  color: #ce93d8;
+}
+
+/* ---- Responsive breakpoints ---- */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .controls-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .app {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .app-header h1 {
+    font-size: 1.15rem;
+  }
+
+  .conn-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .field:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .btn {
+    flex: 1 1 auto;
+  }
+
+  .controls-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .param-row, .slider-row {
+    font-size: 1rem;
+  }
+}
