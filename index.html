@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ESPHomeMQTT 控制台</title>
 <link rel="icon" href="assets/IoT-icon.png">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 <div class="app">
@@ -14,7 +14,7 @@
     <img src="assets/IoT-icon.png" alt="" class="app-icon">
     <h1>ESPHomeMQTT 控制台</h1>
     <!-- bump this together with app.js's ?v= query string below on every release -->
-    <span class="version-badge">V2</span>
+    <span class="version-badge">V3</span>
   </header>
 
   <section class="card">
@@ -48,56 +48,15 @@
     </div>
   </section>
 
-  <section class="card">
-    <h2 class="card-title">燈光 / 開關</h2>
-    <div class="controls-grid">
-      <div class="led-block">
-        <button id="led1" class="led-btn" type="button">1</button>
-        <span class="control-label">LED 1</span>
+  <section class="card dashboard-card">
+    <div class="dash-toolbar">
+      <h2 class="card-title">儀表板</h2>
+      <div class="dash-toolbar-actions">
+        <button id="btnAddWidget" class="btn btn-add" type="button" hidden>+ 新增元件</button>
+        <button id="btnEditMode" class="btn btn-edit" type="button">編輯</button>
       </div>
-      <div class="led-block">
-        <button id="led2" class="led-btn" type="button">2</button>
-        <span class="control-label">LED 2</span>
-      </div>
-      <label class="switch-block">
-        <span class="control-label">開關1</span>
-        <span class="switch">
-          <input id="switch1" type="checkbox">
-          <span class="switch-track switch-track-red"></span>
-        </span>
-      </label>
-      <label class="switch-block">
-        <span class="control-label">開關2</span>
-        <span class="switch">
-          <input id="switch2" type="checkbox">
-          <span class="switch-track"></span>
-        </span>
-      </label>
     </div>
-  </section>
-
-  <section class="card">
-    <h2 class="card-title">參數 / 感測值</h2>
-
-    <div class="param-row">
-      <span class="param-label">參數1:</span>
-      <span id="labelV1" class="param-value">XXX 單位</span>
-    </div>
-    <div class="param-row">
-      <span class="param-label">參數2:</span>
-      <span id="labelV2" class="param-value">XXX 單位</span>
-    </div>
-
-    <div class="slider-row">
-      <span class="param-label">參數3:</span>
-      <input id="slider1" type="range" min="0" max="100" value="30" class="slider slider-red">
-      <span id="sliderValue1" class="slider-value">30</span>
-    </div>
-    <div class="slider-row">
-      <span class="param-label">參數4:</span>
-      <input id="slider2" type="range" min="0" max="100" value="30" class="slider slider-cyan">
-      <span id="sliderValue2" class="slider-value">30</span>
-    </div>
+    <div id="grid" class="grid"></div>
   </section>
 
   <section class="card">
@@ -110,7 +69,31 @@
 
 </div>
 
+<div id="addMenuOverlay" class="overlay" hidden>
+  <div class="add-menu">
+    <h3>新增元件</h3>
+    <button class="add-menu-item" data-type="button" type="button">🔘 按鈕</button>
+    <button class="add-menu-item" data-type="switch" type="button">🔀 開關</button>
+    <button class="add-menu-item" data-type="slider" type="button">🎚️ 拉桿</button>
+    <button class="add-menu-item" data-type="led" type="button">💡 LED 燈</button>
+    <button class="add-menu-item" data-type="label" type="button">🏷️ 標籤</button>
+    <button id="btnCancelAdd" class="btn btn-clear" type="button">取消</button>
+  </div>
+</div>
+
+<div id="configOverlay" class="overlay" hidden>
+  <div class="modal">
+    <h3 id="configTitle">設定元件</h3>
+    <div id="configFields" class="config-fields"></div>
+    <div class="modal-actions">
+      <button id="btnDeleteWidget" class="btn btn-danger" type="button">刪除</button>
+      <button id="btnCancelConfig" class="btn btn-clear" type="button">取消</button>
+      <button id="btnSaveConfig" class="btn btn-primary" type="button">儲存</button>
+    </div>
+  </div>
+</div>
+
 <script src="vendor/mqtt.min.js"></script>
-<script src="app.js?v=2"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
